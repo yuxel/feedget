@@ -13,6 +13,9 @@ feedget.getFeed = function(url) {
 
 feedget.errorHandler = function(errorObject) {
     switch(errorObject.code) {
+            case "1" : 
+                    text = "Feed not valid"; 
+                    break;
             case "2" : 
                     text = "Feed not valid"; 
                     break;
@@ -38,18 +41,18 @@ feedget.parser = function(data) {
 
         for(i=0; i< items.length; i++) {
             title = items[i].title;
-            summary = items[i].summary;
+            description = items[i].description;
             link = items[i].link;
-            updated = new Date();
-            updated.setTime ( items[i].updated * 1000 ); //to milliseconds
+            feedDate = new Date();
+            feedDate.setTime ( items[i].date * 1000 ); //to milliseconds
 
-            updatedText = updated.toGMTString();
+            dateText = feedDate.toGMTString();
 
             text += "<li class=\"feedgetItem\">";
             text += "<div class=\"feedgetItemContainer\">";
             text += "<h1 class=\"feedgetHeader\">" + title + "</h1>";
-            text += "<span class=\"feedgetDateTime\">" + updatedText + "</span>";
-            text += "<p class=\"feedgetSummary\">" + summary + "</p>";
+            text += "<span class=\"feedgetDateTime\">" + dateText + "</span>";
+            text += "<p class=\"feedgetSummary\">" + description + "</p>";
             text += "<a class=\"feedgetLink\" href=\"" + link + "\">More</a>";
             text += "</div>"
             text += "</li>";

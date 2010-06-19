@@ -8,9 +8,23 @@
     </head>
     <body>
         <div>
-            <a href="#" onclick="feedget.getFeed('http://my.opera.com/desktopteam/xml/rss/blog/')">Valid feed from MyOpera.com</a> | 
-            <a href="#" onclick="feedget.getFeed('http://yuxel.net/?module=news&amp;action=rss')">A feed which has syntax error</a> |
-            <a href="#" onclick="feedget.getFeed('http://php-tr.com/rss20.xml')">Another valid feed</a>
+            <a href="#" onclick="feedget.getFeed('http://my.opera.com/desktopteam/xml/rss/blog/')">
+                Valid RSS feed from MyOpera.com
+            </a> 
+            | 
+            <a href="#" onclick="feedget.getFeed('http://github.com/yuxel.atom')">
+                Valid ATOM feed from GitHub
+            </a> 
+            | 
+            <a href="#" onclick="feedget.getFeed('http://yuxel.net/?module=news&amp;action=rss')">
+                A feed which has syntax error
+            </a> 
+            <br/>
+            
+            <br/>
+            Or type your own url (only RSS feeds are supported by now) <br/>
+            <input type="text" style="width:40%" id="input"/> 
+            <input type="button" onclick="feedget.getFeed(document.getElementById('input').value)" value="Try it!"/>
 
             <div id="feedgetContainer">
                 <!-- DOM will be populated like this
