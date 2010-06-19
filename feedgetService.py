@@ -86,7 +86,7 @@ class FeedgetService(tornado.web.RequestHandler):
 
         fetchedData = feedparser.parse(feedContent)
         if fetchedData.bozo == 1:
-            raise Exception('2', fetchedData.bozo ) 
+            raise Exception('2', "Malformatted feed" ) 
 
 
         items = []
@@ -97,15 +97,16 @@ class FeedgetService(tornado.web.RequestHandler):
             item["description"] = None #will be popuplated below
             item["date"] = None #will be populated below
 
-            #for RSS feeds
-            if fetchedData.version.startswith("rss"):
-                #todo: atom feed support
-                item["description"] = entry.description
-                item["date"] = int(time.mktime(entry.date_parsed))
 
-            #for ATOM feeds
-            elif fetchedData.version.startswith("atom"):
-                item["description"] = entry.subtitle
+            
+            try: #for rss feeds
+                item["description"] = entry.description
+            except: #for atom feeds
+                item["description"] = entry.summary
+
+            try: #for rss
+                item["date"] = int(time.mktime(entry.date_parsed))
+            except: #for atom
                 item["date"] = int(time.mktime(entry.updated_parsed))
 
             items.append ( item )
