@@ -14,4 +14,4 @@ A web service to serv newsfeeds (RSS, ATOM) as web widgets using JSONP
 Start web server with 
     python feedgetService.py
 
-and visit [http://localhost:8888/static/index.html]http://localhost:8888/static/index.html
+and visit [http://localhost:8888/static/index.html](http://localhost:8888/static/index.html)
