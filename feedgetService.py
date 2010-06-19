@@ -8,9 +8,31 @@ import tornado.ioloop
 import tornado.web
 
 import feedparser #ultimate feed parser
-import simplejson 
 import time
 import os
+
+
+from tornado.options import define, options
+
+define("port", default=8888, help="port for server", type=int)
+define("callbackMethod", default="feedget.parser", help="callback method for JSONP requests", type=str)
+
+
+class Application(tornado.web.Application):
+  
+    def __init__(self):
+        handlers = [
+            (r"/jsonp/(.*)", FeedgetService),
+        ]
+
+        settings = {
+            "static_path": os.path.join(os.path.dirname(__file__), "static"),
+        }
+
+        tornado.web.Application.__init__(self, handlers, **settings)
+
+
+
 
 class FeedgetService(tornado.web.RequestHandler):
     
@@ -40,39 +62,29 @@ class FeedgetService(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self, url):
         print ("request for " + url)
-        # JavaScript callback method
-        self.callbackMethod = "feedget.parser" 
         http = tornado.httpclient.AsyncHTTPClient()
         http.fetch(url, callback=self.async_callback(self.printData))
 
     def printData(self, response):
         try :
-            parsedFeed = self.parseFeed(response.body)
-            jsonDump = simplejson.dumps(parsedFeed);
+            output = self.parseFeed(response.body)
         except Exception, error:
             print error
             output = {}
             output["error"] = {};
             output["error"]["code"] = error[0];
             output["error"]["message"] = error[1]
-            jsonDump = simplejson.dumps(output)
+        
+        jsonDump = tornado.escape.json_encode(output)
 
-        jsonpData = self.callbackMethod  + '( ' + jsonDump + ')'
+        jsonpData = options.callbackMethod  + '( ' + jsonDump + ')'
         self.write(jsonpData)
             
         # thanks haldun for this fix
         self.finish()
 
-#set static path for assets
-settings = {
-    "static_path": os.path.join(os.path.dirname(__file__), "static"),
-}
-
-application = tornado.web.Application([
-    (r"/jsonp/(.*)", FeedgetService),
-], **settings)
-
 if __name__ == "__main__":
-    http_server = tornado.httpserver.HTTPServer(application)
-    http_server.listen(8888)
+    tornado.options.parse_command_line()
+    http_server = tornado.httpserver.HTTPServer(Application())
+    http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
