@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Feedget Examples</title>
+        <!-- get feedget javascript API -->
+        <script type="text/javascript" src="feedget.js"></script>
+    </head>
+    <body>
+        <div>
+            <a href="#" onclick="feedget.getFeed('http://my.opera.com/desktopteam/xml/rss/blog/')">Valid feed from MyOpera.com</a> | 
+            <a href="#" onclick="feedget.getFeed('http://yuxel.net/?module=news&amp;action=rss')">A feed which has syntax error</a> |
+            <a href="#" onclick="feedget.getFeed('http://php-tr.com/rss20.xml')">Another valid feed</a>
+
+            <div id="feedgetContainer">
+                <!-- DOM will be populated like this
+                    <ul class="feedgetList">
+                        <li class="feedgetItem">
+                            <div class="feedgetItemContainer"> 
+                                <h1 class="feedgetHeader"> HEADER FOR ITEM </h1>
+                                <span class="feedgetDateTime"> Fri, 28 May 2010 03:48:07 GMT </span>
+                                <p class="feedgetSummary"> HERE COMES ITEM SUMMARY </p>
+                                <a class="feedgetLink" href="LINK_FOR_ITEM"> More... </a>
+                            </div>
+                        </li>
+                    </ul>
+                -->
+            </div> 
+
+        </div>
+    </body>
+</html>

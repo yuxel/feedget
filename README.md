@@ -9,4 +9,9 @@ A web service to serv newsfeeds (RSS, ATOM) as web widgets using JSONP
 * [simplejson](http://pypi.python.org/pypi/simplejson/) : Python library to encode/decode JSON data 
 
 
-# TODO : FILL BELOW
+# Howto Run
+
+Start web server with 
+    python feedgetService.py
+
+and visit [http://localhost:8888/static/index.html]http://localhost:8888/static/index.html
