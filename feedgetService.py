@@ -59,6 +59,8 @@ class FeedgetService(tornado.web.RequestHandler):
 
         jsonpData = self.callbackMethod  + '( ' + jsonDump + ')'
         self.write(jsonpData)
+            
+        # thanks haldun for this fix
         self.finish()
 
 #set static path for assets
