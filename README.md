@@ -19,4 +19,4 @@ and visit [http://localhost:8888/static/index.html](http://localhost:8888/static
 
 # Example
 
-Check [http://github.com/yuxel/feedget/blob/master/static](static/)  folder for a working example
+Check [static/](http://github.com/yuxel/feedget/blob/master/static)  folder for a working example
