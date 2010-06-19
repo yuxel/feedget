@@ -3,6 +3,7 @@ Feedget service using Tornado web
 Its simply serving RSS/Atom contents as JSONP data
 """
 import tornado.httpserver
+import tornado.httpclient
 import tornado.ioloop
 import tornado.web
 
@@ -13,42 +14,52 @@ import os
 
 class FeedgetService(tornado.web.RequestHandler):
     
-    def parseFeed(self, url):
-        fetchedData = feedparser.parse(url)
-        # check for errors or invalid feed
-        if fetchedData.bozo == 1:
-            raise Exception( '2', fetchedData.bozo_exception.getMessage() )
+    def parseFeed(self, feedContent):
+            
+        if feedContent == None:
+            raise Exception('1', "Not valid Feed" ) 
 
-        else:
-            items = []
-            for entry in fetchedData['entries']:
-                #todo: atom feed support
-                item = {}
-                item["title"] = entry.title
-                item["link"]  = entry.link
-                item["summary"] = entry.summary
-                item["updated"] = int(time.mktime(entry.updated_parsed))
-
-                items.append ( item )
         
-            return items
+        fetchedData = feedparser.parse(feedContent)
+        if fetchedData.bozo == 1:
+            raise Exception('2', fetchedData.bozo ) 
 
+        items = []
+        for entry in fetchedData['entries']:
+            #todo: atom feed support
+            item = {}
+            item["title"] = entry.title
+            item["link"]  = entry.link
+            item["summary"] = entry.summary
+            item["updated"] = int(time.mktime(entry.updated_parsed))
+
+            items.append ( item )
+    
+        return items
+
+    @tornado.web.asynchronous
     def get(self, url):
+        print ("request for " + url)
         # JavaScript callback method
-        callbackMethod = "feedget.parser" 
+        self.callbackMethod = "feedget.parser" 
+        http = tornado.httpclient.AsyncHTTPClient()
+        http.fetch(url, callback=self.async_callback(self.printData))
 
+    def printData(self, response):
         try :
-            parsedFeed = self.parseFeed(url)
+            parsedFeed = self.parseFeed(response.body)
             jsonDump = simplejson.dumps(parsedFeed);
         except Exception, error:
+            print error
             output = {}
             output["error"] = {};
             output["error"]["code"] = error[0];
             output["error"]["message"] = error[1]
             jsonDump = simplejson.dumps(output)
 
-        jsonpData = callbackMethod  + '( ' + jsonDump + ')'
+        jsonpData = self.callbackMethod  + '( ' + jsonDump + ')'
         self.write(jsonpData)
+        self.finish()
 
 #set static path for assets
 settings = {
