@@ -16,3 +16,7 @@ Start web service with
     python feedgetService.py
 
 and visit [http://localhost:8888/static/index.html](http://localhost:8888/static/index.html)
+
+# Example
+
+Check [http://github.com/yuxel/feedget/blob/master/static](static/)  folder for a working example
