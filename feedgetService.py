@@ -13,7 +13,7 @@ import feedparser #ultimate feed parser
 import time
 import os
 import memcache
-import hashlib #for md5
+from hashlib import md5
 
 from tornado.options import define, options
 
@@ -43,7 +43,7 @@ class FeedgetService(tornado.web.RequestHandler):
     def get(self, url):
 
         self.cacheEngine = self.settings["cache_engine"]
-        self.cacheKey = md5.md5(url).hexdigest()
+        self.cacheKey = md5(url).hexdigest()
         data = self.getFromMemcache()
 
         """
