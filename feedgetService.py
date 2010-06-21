@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 """
 " Feedget service using Tornado web
 " Its simply serving RSS/Atom contents as JSONP data
@@ -11,7 +13,7 @@ import feedparser #ultimate feed parser
 import time
 import os
 import memcache
-import base64
+import md5
 
 from tornado.options import define, options
 
@@ -41,7 +43,7 @@ class FeedgetService(tornado.web.RequestHandler):
     def get(self, url):
 
         self.cacheEngine = self.settings["cache_engine"]
-        self.cacheKey = base64.b64encode(url)
+        self.cacheKey = md5.md5(url).hexdigest()
         data = self.getFromMemcache()
 
         """
