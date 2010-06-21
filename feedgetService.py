@@ -13,7 +13,7 @@ import feedparser #ultimate feed parser
 import time
 import os
 import memcache
-import md5
+import hashlib #for md5
 
 from tornado.options import define, options
 
