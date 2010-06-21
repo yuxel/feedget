@@ -43,7 +43,8 @@ class FeedgetService(tornado.web.RequestHandler):
     def get(self, url):
 
         self.cacheEngine = self.settings["cache_engine"]
-        self.cacheKey = md5(url).hexdigest()
+        urlWithTime = time.strftime("%Y-%m-%d-%H-%M")
+        self.cacheKey = md5(urlWithTime).hexdigest()
         data = self.getFromMemcache()
 
         """
