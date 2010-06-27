@@ -1,15 +1,14 @@
 #!/usr/bin/python
 
-"""
-" Feedget service using Tornado web
-" Its simply serving RSS/Atom contents as JSONP data
-"""
+# Feedget service using Tornado web
+# Its simply serving RSS/Atom contents as JSONP data
+
 import tornado.httpserver
 import tornado.httpclient
 import tornado.ioloop
 import tornado.web
 
-import feedparser #ultimate feed parser
+import feedparser
 import time
 import os
 import memcache
@@ -43,14 +42,13 @@ class FeedgetService(tornado.web.RequestHandler):
     def get(self, url):
 
         self.cacheEngine = self.settings["cache_engine"]
-        urlWithTime = time.strftime("%Y-%m-%d-%H-%M")
+        urlWithTime = url + time.strftime("%Y-%m-%d-%H-%M")
         self.cacheKey = md5(urlWithTime).hexdigest()
         data = self.getFromMemcache()
 
-        """
-        " if url cached serve from memcache
-        " else fetch data
-        """
+
+        # if url cached serve from memcache
+        # else fetch data
         if data == None:
             http = tornado.httpclient.AsyncHTTPClient()
             http.fetch(url, callback=self.async_callback(self.printJSONP))
@@ -59,9 +57,8 @@ class FeedgetService(tornado.web.RequestHandler):
             self.finish()
         
    
-    """
-    " get data for cacheKey from memcache
-    """
+    
+    # get data for cacheKey from memcache
     def getFromMemcache(self):
         try:
             data = self.cacheEngine.get(self.cacheKey)
@@ -69,9 +66,7 @@ class FeedgetService(tornado.web.RequestHandler):
         except Exception, error:
             return None
 
-    """
-    " set data for cacheKey from memcache
-    """
+    # set data for cacheKey from memcache
     def setToMemcache(self, data):
         try:
             self.cacheEngine.set(self.cacheKey, data)
@@ -80,9 +75,7 @@ class FeedgetService(tornado.web.RequestHandler):
             return False
   
 
-    """
-    " parse feed from feedContent
-    """
+    # parse feed from feedContent
     def parseFeed(self, feedContent):
         if feedContent == None:
             raise Exception('1', "Not valid Feed" ) 
@@ -117,9 +110,7 @@ class FeedgetService(tornado.web.RequestHandler):
         return items
 
 
-    """
-    " print data as JSONP
-    """
+    # print data as JSONP
     def printJSONP(self, response):
         success = False
         
@@ -136,9 +127,7 @@ class FeedgetService(tornado.web.RequestHandler):
 
         jsonpData = options.callbackMethod  + '( ' + jsonDump + ')'
         
-        """
-        " set data to memcache on success
-        """
+        # set data to memcache on success
         if success == True:
             self.setToMemcache(jsonpData)
 
