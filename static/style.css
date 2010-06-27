@@ -50,8 +50,8 @@ input.submitButton {
 .ornament {
     background:url('images/ornament.png') no-repeat;
     width:854px;
-    height:107px;
-    margin:30px auto;
+    height:25px;
+    margin:30px auto 0 auto;
     padding-top:120px;
     text-align:center;
     color:#FFFFFF;
