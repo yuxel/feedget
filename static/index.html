@@ -3,89 +3,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Feedget Examples</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
         <!-- get feedget javascript API -->
         <script type="text/javascript" src="feedget.js"></script>
-        <style>
-
-            body { 
-                margin:0;
-                padding:0;
-                background:#b2c2d5 url('images/bg.jpg') no-repeat center center;
-                font:13px Arial, Helvetica, sans-serif;
-            }
-
-            #container {
-                width:960px;
-                margin:0 auto;
-            }
-
-            a.logo {
-                display:block;
-                width:205px;
-                height:73px;
-                background:url('images/logo.png') no-repeat;
-                margin:0 auto;
-            }
-
-            .motto {
-                width:434px;
-                height:65px;
-                background:url('images/motto.png') no-repeat;
-                margin:5px auto;
-            }
-
-            input.searchBar {
-                background:transparent url(images/input.png) no-repeat scroll center center;
-                border:none;
-                display:block;
-                font-size:24px;
-                line-height:24px;    
-                height:30px;
-                margin:15px auto 0;
-                width:688px;
-                padding:0 10px;
-            }
-    
-            input.submitButton {
-                background:url('images/widgetize.png') no-repeat;
-                border:none;
-                width:218px;
-                height:68px;
-                margin:10px auto;
-                display:block;
-                cursor:pointer;
-            }
-
-            .ornament {
-                background:url('images/ornament.png') no-repeat;
-                width:854px;
-                height:107px;
-                margin:30px auto;
-                padding-top:120px;
-                text-align:center;
-                color:#FFFFFF;
-            }
-
-            .ornament a {
-                text-decoration:none;
-                color:#FFFFFF;
-                margin:0 10px;
-                font-weight:bold;
-            }
-
-        </style>
     </head>
     <body>
         <div id="container">
-            <a class="logo sprite" href=""></a>
-            <div class="motto sprite"></div>
+            <a class="logo sprite hideText" href="">
+                Feedget::Widgetize your feeds. Feedget is a web service to serve RSS/ATOM feeds as JSONP widgets
+            </a>
+            <div class="motto sprite hideText">
+                Widgetize your feeds in 3 steps
+            </div>
 
-            <form method="post">
-                <div>
-                    <input type="text" class="searchBar sprite"/>
-                    <input type="button" class="submitButton"/>
-                </div>
-            </form>
+            <input type="text" class="searchBar sprite"/>
+            <input type="button" class="submitButton hideText" value="Widgetize now!"/>
 
             <div class="ornament">
                 <a href="#">about</a>
