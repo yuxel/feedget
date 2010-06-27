@@ -1,5 +1,6 @@
 var feedget = {};
 feedget.APIUrl = "http://localhost:8888/jsonp/";
+//feedget.APIUrl = "http://api.feedget.net/";
 feedget.getFeed = function(url) {
     var script  = document.createElement('script');
     //todo: determine seperator ? or & 
