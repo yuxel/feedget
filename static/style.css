@@ -66,6 +66,6 @@ input.submitButton {
 
 .hideText {
     color:red;
-    text-indent:-999999999px;
+    text-indent:-99999px;
 }
 
