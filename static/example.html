@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Feedget Examples</title>
+        <!-- get feedget javascript API -->
+        <script type="text/javascript" src="feedget.js"></script>
+        <style>
+
+            body, div { 
+                margin:0;
+                padding:0;
+                background:#000000 url('images/bg.jpg') repeat-x 0 0;
+            }
+
+            #container {
+                width:960px;
+                margin:0 auto;
+            }
+
+            .sprite {
+                background:url('images/sprite.jpg') no-repeat;
+            }
+
+            a.logo {
+                display:block;
+                width:206px;
+                height:67px;
+                background-position:0 -133px;
+                margin:0 auto;
+            }
+
+            .motto {
+                width:600px;
+                height:66px;
+                background-position:0 -67px;
+                margin:5px auto;
+            }
+
+            input.searchBar {
+                width:680px;
+                height:60px;
+                background-position:0 0;
+                margin:0 auto;
+                border:none;
+                position:relative;
+                display:block;
+                margin-top:15px;
+            }
+    
+            input.submitButton {
+                position:absolute;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <a class="logo sprite" href=""></a>
+            <div class="motto sprite"></div>
+
+            <form method="post">
+                <div>
+                    <input type="text" class="searchBar sprite"/>
+                </div>
+            </form>
+
+        </div> <!-- #container -->
+    </body>
+</html>

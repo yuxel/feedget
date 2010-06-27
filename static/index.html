@@ -5,42 +5,118 @@
         <title>Feedget Examples</title>
         <!-- get feedget javascript API -->
         <script type="text/javascript" src="feedget.js"></script>
+        <style>
+
+            body { 
+                margin:0;
+                padding:0;
+                background:#b2c2d5 url('images/bg.jpg') no-repeat center center;
+            }
+
+            #container {
+                width:960px;
+                margin:0 auto;
+            }
+
+            a.logo {
+                display:block;
+                width:205px;
+                height:73px;
+                background:url('images/logo.png') no-repeat;
+                margin:0 auto;
+            }
+
+            .motto {
+                width:434px;
+                height:65px;
+                background:url('images/motto.png') no-repeat;
+                margin:5px auto;
+            }
+
+            input.searchBar {
+                width:688px;
+                height:46px;
+                background:url('images/input.png') no-repeat;
+                margin:0 auto;
+                border:none;
+                position:relative;
+                display:block;
+                margin-top:15px;
+                padding:0 10px 0 10px;
+                font-size:22px;
+                line-height:22px;
+            }
+    
+            input.submitButton {
+                background:url('images/widgetize.png') no-repeat;
+                border:none;
+                width:218px;
+                height:68px;
+                margin:30px auto;
+                display:block;
+                cursor:pointer;
+            }
+
+            .ornament {
+                background:url('images/ornament.png') no-repeat;
+                width:854px;
+                height:107px;
+                margin:30px auto;
+                padding-top:120px;
+                text-align:center;
+                padding-right:10px;
+                color:#FFFFFF;
+            }
+
+            .ornament ul {
+                height:20px;
+                width:140px;
+                margin:0 auto;
+            }
+
+            .ornament li, ul {
+                list-style-type:none;
+                margin:0;
+                padding:0;
+            }
+
+            .ornament li {
+                float:left;
+                margin-right:20px;
+            }
+
+            .ornament li a {
+                text-decoration:none;
+                color:#FFFFFF;
+            }
+
+        </style>
     </head>
     <body>
-        <div>
-            <a href="#" onclick="feedget.getFeed('http://my.opera.com/desktopteam/xml/rss/blog/')">
-                Valid RSS feed from MyOpera.com
-            </a> 
-            | 
-            <a href="#" onclick="feedget.getFeed('http://github.com/yuxel.atom')">
-                Valid ATOM feed from GitHub
-            </a> 
-            | 
-            <a href="#" onclick="feedget.getFeed('http://yuxel.net/?module=news&amp;action=rss')">
-                A feed which has syntax error
-            </a> 
-            <br/>
-            
-            <br/>
-            Or type your own url (only RSS feeds are supported by now) <br/>
-            <input type="text" style="width:40%" id="input"/> 
-            <input type="button" onclick="feedget.getFeed(document.getElementById('input').value)" value="Try it!"/>
+        <div id="container">
+            <a class="logo sprite" href=""></a>
+            <div class="motto sprite"></div>
 
-            <div id="feedgetContainer">
-                <!-- DOM will be populated like this
-                    <ul class="feedgetList">
-                        <li class="feedgetItem">
-                            <div class="feedgetItemContainer"> 
-                                <h1 class="feedgetHeader"> HEADER FOR ITEM </h1>
-                                <span class="feedgetDateTime"> Fri, 28 May 2010 03:48:07 GMT </span>
-                                <p class="feedgetSummary"> HERE COMES ITEM SUMMARY </p>
-                                <a class="feedgetLink" href="LINK_FOR_ITEM"> More... </a>
-                            </div>
-                        </li>
-                    </ul>
-                -->
-            </div> 
+            <form method="post">
+                <div>
+                    <input type="text" class="searchBar sprite"/>
+                    <input type="button" class="submitButton"/>
+                </div>
+            </form>
 
-        </div>
+            <div class="ornament">
+                <ul>
+                    <li>
+                        <a href="#">about</a>
+                    </li>
+                    <li>
+                        <a href="#">contact</a>
+                    </li>
+                    <li style="clear:both">
+                    </li>
+                </ul>
+            </div>
+
+        </div> <!-- #container -->
     </body>
 </html>
